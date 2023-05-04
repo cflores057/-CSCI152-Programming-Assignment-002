@@ -1,0 +1,21 @@
+div{
+    margin: 5px 15px; 
+    padding: 3px;
+    overflow: auto;
+}
+#flex-container{
+    display: flex; 
+    flex-wrap: wrap;
+    margin-top: 18px;
+}
+#flex-container > div{
+    flex: 1;
+    height: 400px;
+}
+#results{
+    padding: 3px;
+    border: solid black 1px;
+}
+p{
+    margin-left: 18px;
+}

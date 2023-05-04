@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+app.use(express.static('public'));
 //had as const instead of let, prevented the delete function from working 
 let users = require('./data');
 
@@ -7,7 +8,7 @@ app.use(express.json());
 
 //just to test out postman, making sure the connection was correct
 app.get('/', (req, res) => {
-    res.send('Hello World');
+    res.send('Hello World!');
 });
 
 //get function to display all users from the data.js file
@@ -57,7 +58,23 @@ app.get('/users/:id', (req, res) => {
         }
     }
     res.status(404).send('User not found');
-    console.log('User under id: ' + id + ' not found.')
+    console.log('User under id: ' + id + ' not found.');
+});
+
+//get function to pull a user by their first name 
+app.get('/user/:firstName', (req, res) => {
+    const firstName = req.params.firstName;
+
+    for(let user of users){
+        if(user.firstName === firstName){
+            res.json(user); 
+            console.log('Displaying user name: ' + firstName);
+            console.log(user);
+            return;
+        }
+    }
+    res.status(404).send('User not found'); 
+    console.log('User under name: ' + firstName + ' not found.');
 });
 
 //delete function that deletes a user, based on the id that is input into the url
